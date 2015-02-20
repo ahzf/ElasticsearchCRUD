@@ -1,0 +1,15 @@
+﻿{
+	"version": "1.0.29.1-*",
+	"dependencies": {
+	
+	},
+
+	"frameworks": {
+		"aspnet50": {
+			"dependencies": {
+				"Newtonsoft.Json": "6.0.8.0",
+				"Microsoft.Net.Http": "2.2.7-beta",
+			}
+		}
+	}
+}

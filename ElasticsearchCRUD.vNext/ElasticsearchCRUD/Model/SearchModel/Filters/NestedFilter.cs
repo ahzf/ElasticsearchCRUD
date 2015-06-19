@@ -10,6 +10,8 @@ namespace ElasticsearchCRUD.Model.SearchModel.Filters
 		private bool _cacheSet;
 		private bool _join;
 		private bool _joinSet;
+		private InnerHits _innerHits;
+		private bool _innerHitsSet;
 
 		public NestedFilter(IFilter filter, string path)
 		{
@@ -37,19 +39,34 @@ namespace ElasticsearchCRUD.Model.SearchModel.Filters
 			}
 		}
 
+		public InnerHits InnerHits
+		{
+			get { return _innerHits; }
+			set
+			{
+				_innerHits = value;
+				_innerHitsSet = true;
+			}
+		}
+
 		public void WriteJson(ElasticsearchCrudJsonWriter elasticsearchCrudJsonWriter)
 		{
 			elasticsearchCrudJsonWriter.JsonWriter.WritePropertyName("nested");
 			elasticsearchCrudJsonWriter.JsonWriter.WriteStartObject();
-
-			JsonHelper.WriteValue("path", _path, elasticsearchCrudJsonWriter);
+		
 			elasticsearchCrudJsonWriter.JsonWriter.WritePropertyName("filter");
 			elasticsearchCrudJsonWriter.JsonWriter.WriteStartObject();
 			_filter.WriteJson(elasticsearchCrudJsonWriter);
 			elasticsearchCrudJsonWriter.JsonWriter.WriteEndObject();
 
+			JsonHelper.WriteValue("path", _path, elasticsearchCrudJsonWriter);
 			JsonHelper.WriteValue("_cache", _cache, elasticsearchCrudJsonWriter, _cacheSet);
 			JsonHelper.WriteValue("join", _join, elasticsearchCrudJsonWriter, _joinSet);
+
+			if (_innerHitsSet)
+			{
+				_innerHits.WriteJson(elasticsearchCrudJsonWriter);
+			}
 
 			elasticsearchCrudJsonWriter.JsonWriter.WriteEndObject();
 		}

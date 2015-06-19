@@ -1,7 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
-using System.Text.RegularExpressions;
 using ElasticsearchCRUD.ContextAddDeleteUpdate.IndexModel;
 using ElasticsearchCRUD.ContextAddDeleteUpdate.IndexModel.MappingModel;
 using ElasticsearchCRUD.ContextAddDeleteUpdate.IndexModel.SettingsModel;
@@ -11,7 +9,7 @@ using ElasticsearchCRUD.Utils;
 
 namespace ElasticsearchCRUD.ContextAddDeleteUpdate
 {
-	public class ElasticsearchSerializer  : IDisposable
+    public class ElasticsearchSerializer  : IDisposable
 	{
 		private readonly ITraceProvider _traceProvider;
 		private ElasticsearchCrudJsonWriter _elasticsearchCrudJsonWriter;

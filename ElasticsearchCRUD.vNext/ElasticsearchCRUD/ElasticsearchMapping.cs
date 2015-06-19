@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
 using System.Reflection;
 using System.Text;
@@ -236,7 +237,7 @@ namespace ElasticsearchCRUD
 			var propertyInfo = entity.GetType().GetProperties();
 			foreach (var property in propertyInfo)
 			{
-                if (Attribute.IsDefined(property, typeof(ElasticsearchIdAttribute)))
+				if (Attribute.IsDefined(property, typeof(KeyAttribute)) || Attribute.IsDefined(property, typeof(ElasticsearchIdAttribute)))
 				{
 					var obj = property.GetValue(entity);
 

@@ -21,7 +21,7 @@ namespace ElasticsearchCRUD.ContextSearch.SearchModel
 		public string TypeInIndex { get; set; }
 
 		[JsonProperty(PropertyName = "_id")]
-		public int Id { get; set; }
+		public object Id { get; set; }
 
 		[JsonProperty(PropertyName = "_score", NullValueHandling = NullValueHandling.Ignore)]
 		public double Score { get; set; }
@@ -37,5 +37,11 @@ namespace ElasticsearchCRUD.ContextSearch.SearchModel
 			var token = Source as JToken;
 			return token.ToObject<T1>();
 		}
+
+		/// <summary>
+		/// This can be used for inner_hits or nested data which is added to the hit result
+		/// </summary>
+		[JsonExtensionData]
+		public Dictionary<string, JToken> ExtensionData { get; set; }
 	}
 }
